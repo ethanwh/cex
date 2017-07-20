@@ -45,11 +45,11 @@ def on_message(ws, message):
 
         f = ''
         if data['pair'] == 'ETH:USD':
-            f = 'cex/eth-usd-orderbook.txt'
+            f = 'data/eth-usd-orderbook.txt'
         elif data['pair'] == 'BTC:USD':
-            f = 'cex/btc-usd-orderbook.txt'
+            f = 'data/btc-usd-orderbook.txt'
         elif data['pair'] == 'ETH:BTC':
-            f = 'cex/eth-btc-orderbook.txt'
+            f = 'data/eth-btc-orderbook.txt'
 
         with open(f, 'a') as outfile:
             writer = csv.writer(outfile)
@@ -59,7 +59,7 @@ def on_message(ws, message):
         ws.send('{"e":"pong"}')
 
     elif message['e'] == 'tick':
-        with open('cex/transaction-ticker.txt', 'a') as outfile:
+        with open('data/transaction-ticker.txt', 'a') as outfile:
             writer = csv.writer(outfile)
             writer.writerow([int(time.time()),message["data"][u'symbol2'],message["data"][ u'symbol1'],message["data"][u'price']])
 
